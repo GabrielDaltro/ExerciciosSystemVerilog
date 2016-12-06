@@ -64,3 +64,12 @@ simulation/
 timing/
 testbench/
 *_sim/
+
+# ignorar o arquivo top lever by Gabriel
+templateDE1.v
+
+#Ignorar os arquivos de configuração do projeto
+*.qpf
+*.qsf
+
+
