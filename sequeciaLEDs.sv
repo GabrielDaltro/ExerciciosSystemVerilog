@@ -19,6 +19,13 @@ L0 L1 L2 L3
  *
       *
 (...)
-
-
 */
+
+module sequeciaLED (out, clk);
+
+output logic [3:0] out;
+
+
+
+
+endmodule; 
