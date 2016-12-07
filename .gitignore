@@ -71,5 +71,5 @@ templateDE1.v
 #Ignorar os arquivos de configuração do projeto
 *.qpf
 *.qsf
-
+*.cdf
 
