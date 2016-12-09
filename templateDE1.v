@@ -225,10 +225,10 @@ assign	AUD_BCLK	=	1'bz;
 assign	GPIO_0		=	36'hzzzzzzzzz;
 assign	GPIO_1		=	36'hzzzzzzzzz;
 
-/*#####################################################
+/*#####################################################*/
 
-INSTANCIE AQUI SEU TOPLEVEL
+divisor_clock div_clk(.clk_in(CLOCK_50), .clk_out(LEDG[0]), .reset(KEY[0]));
 
-#####################################################*/
+/*#####################################################*/
 
 endmodule

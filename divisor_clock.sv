@@ -1,7 +1,10 @@
 /*
+Gabriel Daltro Darte
+Data: 02/12/2016
 
-
-*/
+Descriç~ao: Bloco que possui como entrada um clock de 50 MHz e possui como sa´ida um CLOCK de 1 Hz
+O bloco tambem possui uma entrada reset que quando colocada em nivel zero coloca a saida tambem em zero
+ */
 
 module divisor_clock (clk_in, clk_out, reset);
 
