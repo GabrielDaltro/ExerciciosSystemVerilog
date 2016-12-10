@@ -64,6 +64,9 @@ simulation/
 timing/
 testbench/
 *_sim/
+output_files/
+
+
 
 # ignorar o arquivo top lever by Gabriel
 #templateDE1.v
