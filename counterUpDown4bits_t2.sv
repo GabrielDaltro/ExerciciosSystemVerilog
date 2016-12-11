@@ -29,25 +29,22 @@ module counterUpDown4bits_t2 (clk,out,reset);
 		 end
 		else // se reset nao pressionado
 		 begin
+		 
 			if (direction == 1'b0) // Caso direçao for crescente
-			 begin
-				if (out < 4'b1111) // E a saida ainda nao eh 15
-					out <= out + 1; // incremente a saida em um unidade
-				else // se ela alcançou o valor 15
-					direction <= ~direction; // inverte a variavel direction
-			 end
+				out <= out + 1'b1; // saida eh incrementada
 			else // Caso direçao seja decrescente
-			 begin
-				if (out > 4'b0) // E a saida ainda nao eh 0
-					out <= out - 1; // a saida eh decrementada
-				else // se ela alcançou o valor zero 
-					direction <= ~direction; // a variavel direction eh invertida
-			 end
+				out <= out - 1; // a saida eh decrementada
+				
+			if ( (out == 4'b1110 && direction == 0)||(out == 4'b0001 && direction == 1) ) 
+					direction <= ~direction; 
+										/* a direçao deve mudar quando out chegar em 15 e a direçao for crescente ou
+										quando out chegar em 0 e a direçao for decrescente.Como esse if  eh  executado 
+										paralelamente com o if que modifica o valor de out e  eh utilizado a atribuiçao 
+										nao bloqueante, esse if sempre testa o  antigo valor  de out.  Quando out mudar
+										para 15, esse if v^e o estado 14 e quando out mudar para zero  o if ver´a 1.
+										*/
 				
 		 end	 
-	 end
+	 end // end do always 
 
 endmodule
-
-/* Nesse contador, a saida permanece dois pulso de clock em 15 e dois pulso de clock em 0. Isso se deve ao fato
-de que apos alcançar 15 ou 0, o pulso de clock seguinte nao altera a saida, ele apenas muda o conteudo  de direction */
