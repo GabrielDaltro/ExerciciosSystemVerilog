@@ -265,7 +265,7 @@ binary_to_disp7 decoder(.number_in(conection_2), .disp_unidade(HEX0), .disp_deze
 #####################################################*/
 
 
-/*######################## INSTANCIA O CONTADOR UP/DOWN DE 4 BITS TIPO 2 ###########################*/
+/*######################## INSTANCIA O CONTADOR UP/DOWN DE 4 BITS TIPO 2 ###########################
 
 assign	HEX2		=	7'h7F;
 assign	HEX3		=	7'h7F;
@@ -284,6 +284,25 @@ counterUpDown4bits_t2  myCounterT2(.clk(conection),.out(conection_2),.reset(KEY[
 
 binary_to_disp7 decoder(.number_in(conection_2), .disp_unidade(HEX0), .disp_dezena(HEX1) );
 									
+#####################################################*/
+
+
+/*######################## INSTANCIA  CRONOMETRO###########################*/
+
+wire conection;
+wire [6:0] conection_2;
+wire [6:0] conection_3;
+
+divisor_clock_10ms div_clk1(.clk_in(CLOCK_50), .clk_out(conection), .reset(KEY[1]));
+
+cronometro c1(.clk(conection), .cent_seg(conection_2),.seg(conection_3) , .pause(SW[0]), .reset(KEY[0]));
+
+binary_to_disp7 decoder1(.number_in(conection_2), .disp_unidade(HEX0), .disp_dezena(HEX1) );
+
+binary_to_disp7 decoder2(.number_in(conection_3), .disp_unidade(HEX2), .disp_dezena(HEX3) );
+									
 /*#####################################################*/
+
+
 
 endmodule
