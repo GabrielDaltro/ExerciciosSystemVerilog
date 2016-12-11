@@ -38,13 +38,13 @@ L0 L1 L2 L3
 		 end
 		else 
 		 begin		
-		   if (state == 2'b10) // a varial state assume os valores entre 0 e 2. 
+		   if (state == 2'b10) // a varial state assume os valores entre 0 e 2, caso ela seja 2: 
 			 begin				  
 				state <= 'b0; // Ao alcançar o valor 2, ela deve voltar a zero 
 				direction <= ~direction; // a direç~ao deve inverter
 			 end
 			else
-			 begin // se state ainda n~ao ´e 2, ela deve ser incrementada
+			 begin // se state ainda nao eh 2, ela deve ser incrementada
 				state <= state + 1'b1;
 			 end	
 			 

@@ -206,9 +206,9 @@ inout	[35:0]	GPIO_0;					//	GPIO Connection 0
 inout	[35:0]	GPIO_1;					//	GPIO Connection 1
 
 //	Turn off all unused display
-assign	HEX0		=	7'h7F;
-assign	HEX1		=	7'h7F;
-assign	HEX2		=	7'h7F;
+//assign	HEX0		=	7'h7F;
+//assign	HEX1		=	7'h7F;
+//assign	HEX2		=	7'h7F;
 assign	HEX3		=	7'h7F;
 //assign	LEDG		=	8'h0;
 //assign	LEDR		=	10'h0;
@@ -225,18 +225,41 @@ assign	AUD_BCLK	=	1'bz;
 assign	GPIO_0		=	36'hzzzzzzzzz;
 assign	GPIO_1		=	36'hzzzzzzzzz;
 
-/*#####################################################*/
+
+/*######################## INSTANCIA O BLOCO sequenciaLED ###########################
+
+assign	HEX1		=	7'h7F;
+assign	HEX2		=	7'h7F;
+assign	HEX3		=	7'h7F;
 
 wire conection;
 
+divisor_clock div_clk1(.clk_in(CLOCK_50), .clk_out(conection), .reset(KEY[1]));
 
+assign LEDR[0] = conection; // a saida do bloco div_clk1 pode ser visualizada no LEDR[0]
+
+sequeciaLED sequenciaLED1(.out(LEDG[3:0]), .clk(conection), .reset(KEY[0]), .direction(LEDR[9]), .state(LEDR[2:1]) );
+									
+#####################################################*/
+
+/*######################## INSTANCIA O CONTADOR UP/DOWN DE 4 BITS TIPO 1 ###########################*/
+
+wire conection;
+
+wire [3:0] conection_2;
+
+assign LEDG[3:0] = conection_2;
 
 divisor_clock div_clk1(.clk_in(CLOCK_50), .clk_out(conection), .reset(KEY[1]));
 
-assign LEDR[0] = conection; 
+assign LEDR[0] = conection; // a saida do bloco div_clk1 pode ser visualizada no LEDR[0]
 
-sequeciaLED sequenciaLED1(.out(LEDG[3:0]), .clk(conection), .reset(KEY[0]), .direction(LEDR[9]), .state(LEDR[2:1]) );
+counterUpDown4bits_t1  myCounterT1(.clk(conection),.out(conection_2),.reset(KEY[0]));
 
+binary_to_disp7 decoder(.number_in(conection_2), .disp_unidade(HEX0), .disp_dezena(HEX1), .disp_centena(HEX2) );
+									
 /*#####################################################*/
+
+
 
 endmodule
