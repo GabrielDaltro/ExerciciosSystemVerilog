@@ -227,7 +227,15 @@ assign	GPIO_1		=	36'hzzzzzzzzz;
 
 /*#####################################################*/
 
-divisor_clock div_clk(.clk_in(CLOCK_50), .clk_out(LEDG[0]), .reset(KEY[0]));
+wire conection;
+
+
+
+divisor_clock div_clk1(.clk_in(CLOCK_50), .clk_out(conection), .reset(KEY[1]));
+
+assign LEDR[0] = conection; 
+
+sequeciaLED sequenciaLED1(.out(LEDG[3:0]), .clk(conection), .reset(KEY[0]), .direction(LEDR[9]), .state(LEDR[2:1]) );
 
 /*#####################################################*/
 
