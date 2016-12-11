@@ -7,12 +7,12 @@
 *Disciplina System Verilog - Programa de Execelencia em Microeletronica
 *
 *
-*Exercicio: Fazer sequenciador que gera a sequência 0 1 2 3 ... 13 14 15 15 14 13 12 ... 3 2 1 0 0 1 2 3 ...
+*Exercicio: Fazer sequenciador que gera a sequência 0 1 2 3 ... 13 14 15 14 13 12 ... 3 2 1 0 1 2 3 ...
 *
 **********************************************************************/
 
 
-module counterUpDown4bits_t1 (clk,out,reset);
+module counterUpDown4bits_t2 (clk,out,reset);
 
 	input logic clk; // entrada de clock
 	input logic reset; // ativo com zero
