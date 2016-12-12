@@ -15,8 +15,8 @@
 module counterUpDown4bits_t1 (clk,out,reset);
 
 	input logic clk; // entrada de clock
-	input logic reset; // ativo com zero
-	output logic [3:0] out; // valor da contagem - saida do bloco
+	input logic reset; // pino de reset - ativo com zero
+	output logic [3:0] out; // pino de saida - valor da contagem 
 	
 	logic direction; // 0 - crescente; 1 - decrescente;
 

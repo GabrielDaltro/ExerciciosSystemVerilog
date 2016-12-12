@@ -25,9 +25,9 @@ L0 L1 L2 L3
 
  module sequeciaLED (out, clk, reset, direction, state );
 
-	output logic [3:0] out;
-	input logic clk;
-	input logic reset; // ativo quando zero
+	output logic [3:0] out; // saida do bloco - deve ser conectada a 4 LEDs
+	input logic clk; // Entrada do sinal de clock
+	input logic reset; // pino de reset - ativo quando zero
 	output logic direction; // quando 0, deslocamento para esquerda, quando 1,  deslocamento para a direita 	
 	output logic [1:0] state; // determina em qual estado o contador vai estar
 

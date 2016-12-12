@@ -1,6 +1,6 @@
 module binary_to_disp7 (number_in, disp_unidade, disp_dezena, disp_centena);
 
-input logic [9:0] number_in;
+input logic [9:0] number_in; // entrada do bloco 
 output logic [7:0] disp_unidade;
 output logic [7:0] disp_dezena;
 output logic [7:0] disp_centena;

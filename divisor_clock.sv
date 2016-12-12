@@ -8,7 +8,7 @@ O bloco tambem possui uma entrada reset que quando colocada em nivel zero coloca
 
 module divisor_clock (clk_in, clk_out, reset);
 
-	input logic clk_in;
+	input logic clk_in; 
 	input logic reset;
 	output logic clk_out;
 

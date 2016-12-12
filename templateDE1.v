@@ -287,22 +287,28 @@ binary_to_disp7 decoder(.number_in(conection_2), .disp_unidade(HEX0), .disp_deze
 #####################################################*/
 
 
-/*######################## INSTANCIA  CRONOMETRO###########################*/
+/*######################## INSTANCIA  CRONOMETRO ###########################*/
 
 wire conection;
 wire [6:0] conection_2;
 wire [6:0] conection_3;
 
-divisor_clock_10ms div_clk1(.clk_in(CLOCK_50), .clk_out(conection), .reset(KEY[1]));
+wire db_out; 
 
-cronometro c1(.clk(conection), .cent_seg(conection_2),.seg(conection_3) , .pause(SW[0]), .reset(KEY[0]));
+
+divisor_clock_10ms div_clk1(.clk_in(CLOCK_50), .clk_out(conection), .reset(1'b1));
+
+//divisor_clock_10ms div_clk1(.clk_in(CLOCK_50), .clk_out(conection), .reset(1'b1));
+
+//debounce db (.data(KEY[3]), .clock(conection), .output_data(db_out)); 
+
+cronometro c1(.clk(conection), .cent_seg(conection_2),.seg(conection_3) , .pause(KEY[1]), .start(KEY[0]), .stop(KEY[2]), .store(KEY[3]), .disp_lap(SW[2:0]));
 
 binary_to_disp7 decoder1(.number_in(conection_2), .disp_unidade(HEX0), .disp_dezena(HEX1) );
 
 binary_to_disp7 decoder2(.number_in(conection_3), .disp_unidade(HEX2), .disp_dezena(HEX3) );
 									
 /*#####################################################*/
-
 
 
 endmodule
