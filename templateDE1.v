@@ -228,7 +228,7 @@ assign	GPIO_1		=	36'hzzzzzzzzz;
 
 /*######################## INSTANCIA O BLOCO sequenciaLED ###########################
 
-//assign	HEX0		=	7'h7F;
+assign	HEX0		=	7'h7F;
 assign	HEX1		=	7'h7F;
 assign	HEX2		=	7'h7F;
 assign	HEX3		=	7'h7F;
@@ -241,7 +241,7 @@ assign LEDR[0] = conection; // a saida do bloco div_clk1 pode ser visualizada no
 
 sequeciaLED sequenciaLED1(.out(LEDG[3:0]), .clk(conection), .reset(KEY[0]), .direction(LEDR[9]), .state(LEDR[2:1]) );
 									
-#####################################################*/
+/*#####################################################*/
 
 /*######################## INSTANCIA O CONTADOR UP/DOWN DE 4 BITS TIPO 1 ###########################
 
@@ -262,7 +262,7 @@ counterUpDown4bits_t1  myCounterT1(.clk(conection),.out(conection_2),.reset(KEY[
 
 binary_to_disp7 decoder(.number_in(conection_2), .disp_unidade(HEX0), .disp_dezena(HEX1) );
 									
-#####################################################*/
+/*################################################################################################*/
 
 
 /*######################## INSTANCIA O CONTADOR UP/DOWN DE 4 BITS TIPO 2 ###########################
@@ -287,7 +287,7 @@ binary_to_disp7 decoder(.number_in(conection_2), .disp_unidade(HEX0), .disp_deze
 #####################################################*/
 
 
-/*######################## INSTANCIA  CRONOMETRO ###########################*/
+/*######################## INSTANCIA  CRONOMETRO ###########################
 
 wire conection;
 wire [6:0] conection_2;
