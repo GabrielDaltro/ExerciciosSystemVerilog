@@ -294,10 +294,10 @@ wire [6:0] conection_2;
 wire [6:0] conection_3;
 
 wire clock_for_debounce_out;
-assign LEDR[8] = clock_for_debounce_out;
+//assign LEDR[8] = clock_for_debounce_out;
 
 wire db_out; 
-assign LEDR[9] = db_out;
+//assign LEDR[9] = db_out;
 
 divisor_clock_10ms div_clk1(.clk_in(CLOCK_50), .clk_out(conection), .reset(1'b1));
 
@@ -305,7 +305,7 @@ divisor_clock_for_debounce(.clk_in(CLOCK_50), .clk_out(clock_for_debounce_out), 
 
 debounce db (.data(KEY[3]), .clock(clock_for_debounce_out), .output_data(db_out)); 
 
-cronometro c1(.clk(conection), .cent_seg(conection_2),.seg(conection_3) , .pause(KEY[1]), .start(KEY[0]), .stop(KEY[2]), .store(db_out), .disp_lap(SW[2:0]));
+cronometro c1(.clk(conection), .cent_seg(conection_2),.seg(conection_3) , .pause(KEY[1]), .start(KEY[0]), .stop(KEY[2]), .store(db_out), .disp_lap(SW[2:0])); // trocar KEY[3] por db_out
 
 binary_to_disp7 decoder1(.number_in(conection_2), .disp_unidade(HEX0), .disp_dezena(HEX1) );
 

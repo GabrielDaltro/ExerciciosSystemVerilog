@@ -50,9 +50,6 @@ module cronometro (clk, cent_seg, seg, pause, start, stop, store, disp_lap);
 	logic [5:0]  lap3_seg;  // register que armazena os valores de segundo da posição de armazenamento lap3
 	
 	
-	// CONEXÕES
-	logic db_out;
-	
 	initial // Não sintetizável, mas no FPGA funciona XD
 	begin
 		lap1_cseg <= 0;
@@ -88,25 +85,25 @@ module cronometro (clk, cent_seg, seg, pause, start, stop, store, disp_lap);
 		//else
 		 
 		// if que controla o incremento dos cantadores de  centésimos de segundo e segundo
-		if (run == 1'b1) // se o botao pause nao for acionado
+		if (run == 1'b1) // se a variável run possuir valor  1, os contadores de tempo devem ser incrementados
 		 begin
-			if (counter_cseg == 7'd99) // E se a contagem dos centesimos de segundo  chegou em 99
+			if (counter_cseg == 7'd99) // se a contagem dos centesimos de segundo  chegar em 99
 			   begin
 					counter_cseg <= 'b0; // a contagem dos centesimos de segundo volta para ao valor zero
 					
-					if (counter_seg == 6'd59) // Se a contagem dos segundo chegou em  59, ela volta para zero
+					if (counter_seg == 6'd59) // Se a contagem dos segundo chegar em  59, ela volta para zero
 						counter_seg <= 'b0;
-					else	// Se ela ainda nao chegou em 59, ela incrementa uma unidade sempre que cent_seg for igual a 99
+					else	// Se ela ainda nao chegou em 59, ela incrementa uma unidade sempre que ccounter_cseg for igual a 99
 						counter_seg <= counter_seg + 1'b1;
 			   end
-			else //Se a contagem dos centesimos de segundo  ainda nao chegou em 99, cent_seg eh incrementado a cada pulso de clock
+			else //Se a contagem dos centesimos de segundo  ainda nao chegou em 99, counter_cseg eh incrementado a cada pulso de clock
 				   counter_cseg <= counter_cseg + 1;					
 		 end // end do if
 	  //else
 
 		//debounce db (.data(store), .clock(clk), .output_data(db_out)); 	 ISSO NÃO PODE FICAR AQUI?
 					
-			
+			// Determina se nos pinos de saída do cronômetro  irá conter o valor da contagem do tempo ou os valores salvos nos registradotrs lap
 			case (disp_lap)
 			0:
 				begin
@@ -133,7 +130,7 @@ module cronometro (clk, cent_seg, seg, pause, start, stop, store, disp_lap);
 			
 	 end // end do always
 	 
-	 
+	 // Sempre que o botão associado a sotore for pressionado (ocorrer uma borda negativa), um dos registadores lap armazenará o conteudo dos contadores de tempo
 	 always_ff @(negedge store )
 		begin
 				case (counter)

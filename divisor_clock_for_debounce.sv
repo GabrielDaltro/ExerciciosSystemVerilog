@@ -20,7 +20,7 @@ module divisor_clock_for_debounce (clk_in, clk_out, reset);
 			counter <= '0;
 			clk_out <= '0;
 		 end
-		else if (counter == 999999)
+		else if (counter == 1999999)
 		 begin
 			counter <= '0;
 			clk_out = ~clk_out;
