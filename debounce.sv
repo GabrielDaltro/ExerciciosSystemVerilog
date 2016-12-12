@@ -30,7 +30,7 @@ module debounce (data, clock, output_data);
 	 end
 	 
 	 // Para chaves que são 0 quando pressionadas
-	 assign output_data = (~reg1) & (~reg2) & (~reg3);
+	 assign output_data = ~((~reg1) & (~reg2) & (~reg3));
 	 
 	 // Para chaves que são 1 quando pressionadas
 	 //assign output_data = reg1 & reg2 & reg3;

@@ -77,7 +77,7 @@ module cronometro (clk, cent_seg, seg, pause, start, stop, store, disp_lap);
 	  // if de controle de stop, pause e run da contagem do cronômetro
 		if (stop == 1'b0) // quando o pino de reset eh colocado em nivel 0
 		 begin
-			cent_seg <= 'b0; // a saida do cronometro vai para zero (centesimos de segundo e segundo)
+			run <= 'b0; // a saida do cronometro vai para zero (centesimos de segundo e segundo)
 			counter_cseg <= 'b0;
 			counter_seg <= 'b0;
 		 end
@@ -105,31 +105,7 @@ module cronometro (clk, cent_seg, seg, pause, start, stop, store, disp_lap);
 	  //else
 
 		//debounce db (.data(store), .clock(clk), .output_data(db_out)); 	 ISSO NÃO PODE FICAR AQUI?
-			
-		 if (store == 1'b0)
-			begin
-				case (counter)
-				0:
-					begin
-						lap1_cseg <= cent_seg ;
-						lap1_seg <= seg ;
-						counter <= 'b1;
-					end
-				1:
-					begin
-						lap2_cseg <= cent_seg;
-						lap2_seg <= seg;
-						counter <= 'b10;
-					end
-				2:
-					begin
-						lap3_cseg <= cent_seg ;
-						lap3_seg <= seg ;
-						counter <= 'b0;
-					end
-				endcase		
-			end //end do if 
-			
+					
 			
 			case (disp_lap)
 			0:
@@ -156,5 +132,31 @@ module cronometro (clk, cent_seg, seg, pause, start, stop, store, disp_lap);
 			
 			
 	 end // end do always
+	 
+	 
+	 always_ff @(negedge store )
+		begin
+				case (counter)
+				0:
+					begin
+						lap1_cseg <= cent_seg ;
+						lap1_seg <= seg ;
+						counter <= 'b1;
+					end
+				1:
+					begin
+						lap2_cseg <= cent_seg;
+						lap2_seg <= seg;
+						counter <= 'b10;
+					end
+				2:
+					begin
+						lap3_cseg <= cent_seg ;
+						lap3_seg <= seg ;
+						counter <= 'b0;
+					end
+				endcase		
+		end //end do always
+	 
 
 endmodule
