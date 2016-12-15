@@ -313,5 +313,38 @@ binary_to_disp7 decoder2(.number_in(conection_3), .disp_unidade(HEX2), .disp_dez
 									
 /*#####################################################*/
 
+/*######################## ACIONAR LEDs com Luminosidades diferentes ###########################*/
+
+// Desliga os displays 7 segmentos
+assign	HEX0		=	7'h7F;
+assign	HEX1		=	7'h7F;
+assign	HEX2		=	7'h7F;
+assign	HEX3		=	7'h7F;
+
+// fios para conetar a saida dos blocos de divisão de clock a outros blocos
+wire conection_clock_out1;
+wire conection_clock_out2;
+
+// fios para conectar as saidas do shift register aos blocos de pwm
+wire [6:0] duty0,duty1,duty2,duty3,duty4,duty5,duty6,duty7;
+
+// instanciação dos blocos que geram clock de 1Hz para o shift register e 10KHz para os blocos de PWM
+divisor_clock_10KHz div_clk_1(.clk_in(CLOCK_50), .clk_out(conection_clock_out1), .reset(1'd1));
+divisor_clock_1Hz   div_clk_2(.clk_in(CLOCK_50), .clk_out(conection_clock_out2), .reset(1'd1));
+
+// instanciação dos blocos de PWM
+pwm pwm0(.clk(conection_clock_out1), .tau(duty0),.pwmout(LEDR[0]));
+pwm pwm1(.clk(conection_clock_out1), .tau(duty1),.pwmout(LEDR[1]));
+pwm pwm2(.clk(conection_clock_out1), .tau(duty2),.pwmout(LEDR[2]));
+pwm pwm3(.clk(conection_clock_out1), .tau(duty3),.pwmout(LEDR[3]));
+pwm pwm4(.clk(conection_clock_out1), .tau(duty4),.pwmout(LEDR[4]));
+pwm pwm5(.clk(conection_clock_out1), .tau(duty5),.pwmout(LEDR[5]));
+pwm pwm6(.clk(conection_clock_out1), .tau(duty6),.pwmout(LEDR[6]));
+pwm pwm7(.clk(conection_clock_out1), .tau(duty7),.pwmout(LEDR[7]));
+
+// instanciação do shift register
+shift_register shift_register1(.clk(conection_clock_out2), .reset(KEY[0]) , .data0(duty0), .data1(duty1), .data2(duty2), .data3(duty3), .data4(duty4), .data5(duty5), .data6(duty6), .data7(duty7) );
+
+
 
 endmodule
