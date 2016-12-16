@@ -284,7 +284,7 @@ counterUpDown4bits_t2  myCounterT2(.clk(conection),.out(conection_2),.reset(KEY[
 
 binary_to_disp7 decoder(.number_in(conection_2), .disp_unidade(HEX0), .disp_dezena(HEX1) );
 									
-#####################################################*/
+/*#####################################################*/
 
 
 /*######################## INSTANCIA  CRONOMETRO ###########################
@@ -313,7 +313,7 @@ binary_to_disp7 decoder2(.number_in(conection_3), .disp_unidade(HEX2), .disp_dez
 									
 /*#####################################################*/
 
-/*######################## ACIONAR LEDs com Luminosidades diferentes ###########################*/
+/*######################## ACIONAR LEDs com Luminosidades diferentes ###########################
 
 // Desliga os displays 7 segmentos
 assign	HEX0		=	7'h7F;
@@ -345,6 +345,24 @@ pwm pwm7(.clk(conection_clock_out1), .tau(duty7),.pwmout(LEDR[7]));
 // instanciação do shift register
 shift_register shift_register1(.clk(conection_clock_out2), .reset(KEY[0]) , .data0(duty0), .data1(duty1), .data2(duty2), .data3(duty3), .data4(duty4), .data5(duty5), .data6(duty6), .data7(duty7) );
 
+/*#####################################################*/
 
+/*######################## Ordenador ###########################
+
+	logic [3:0]numb[5:0];
+	logic [3:0]numb_sort[5:0];
+	/*assign numb[0] = 5;
+	assign numb[1] = 4;
+	assign numb[2] = 3;
+	assign numb[3] = 2; 
+	assign numb[4] = 1;
+	assign numb[5] = 0;*/
+
+
+	ordenador sort1 (ordenar(KEY[0]));
+
+	//assign LEDG[3:0] = numb_sort[5];
+	
+/*#####################################################*/
 
 endmodule
